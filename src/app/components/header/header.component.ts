@@ -13,11 +13,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  /* navigate to the Analytics component */
   navigateToAnalytics(): void {
     this.router.navigate(['/analytics']);
   }
 
-  navigateToHome(): void {
+  /* navigate to the Clients component */
+  navigateToClients(): void {
     this.router.navigate(['/']);
   }
 }
