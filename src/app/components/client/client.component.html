@@ -1,0 +1,55 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Client Information</mat-card-title>
+      <mat-card-subtitle>Enter all details</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="input-form" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <mat-form-field floatLabel="never" hideRequiredMarker>
+          <input
+            matInput
+            placeholder="Name"
+            formControlName="name"
+            type="text">
+        </mat-form-field>
+
+        <mat-form-field floatLabel="never" hideRequiredMarker>
+          <input
+            matInput
+            placeholder="Age"
+            formControlName="age"
+            type="number">
+        </mat-form-field>
+
+        <mat-form-field floatLabel="never" hideRequiredMarker>
+          <input
+            matInput
+            placeholder="Weight"
+            formControlName="weight"
+            type="number">
+        </mat-form-field>
+
+        <ng-container formArrayName="friends" *ngFor="let friendCtrl of friendControls; index as i">
+          <mat-form-field
+            [formGroupName]="i.toString()"
+            floatLabel="never"
+            hideRequiredMarker>
+            <input
+              matInput
+              placeholder="Friend name"
+              formControlName="friend"
+              type="text">
+          </mat-form-field>
+        </ng-container>
+
+        <mat-card-actions>
+          <button mat-button type="submit">Save</button>
+          <button mat-button type="button" (click)="resetFields()">Reset</button>
+          <button mat-button type="button" (click)="addFriend()">Add friend</button>
+          <button mat-button type="button" (click)="removeLastFriend()">Remove last friend</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

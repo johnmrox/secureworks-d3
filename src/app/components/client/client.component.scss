@@ -1,0 +1,12 @@
+mat-card {
+  width: 450px;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form > * {
+  width: 100%;
+}
