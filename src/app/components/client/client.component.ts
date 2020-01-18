@@ -24,10 +24,8 @@ export class ClientComponent implements OnInit {
     private snackBar: MatSnackBar) {
   }
 
-  /*
-  returns an array of the friend controls. there is one initially on the page,
-  but these can be added and removed by the "Add friend" button
-  */
+  /** returns an array of the friend controls. there is one initially on the page
+   * but these can be added and removed by the "Add friend" button */
   get friendControls(): AbstractControl[] {
     return this.friendArray.controls;
   }
@@ -36,9 +34,7 @@ export class ClientComponent implements OnInit {
     this.initializeForms();
   }
 
-  /*
-  initializes the clientForm and any needed controls
-  */
+  /** initializes the clientForm and any needed controls */
   private initializeForms(): void {
     this.clientForm = this.fb.group({
       name: [null],
@@ -50,61 +46,49 @@ export class ClientComponent implements OnInit {
     this.friendArray = this.clientForm.get('friends') as FormArray;
   }
 
-  /* creates a form group for the friends form array on page load and when the
-  "Add friend" button is selected */
+  /** creates a form group for the friends form array on page load and when the
+   * "Add friend" button is selected */
   private createItem(): FormGroup {
     return this.fb.group({
       friend: [null]
     });
   }
 
-  /*
-  when the "Save" button is selected, saves client data, resets the page to its original state,
-  and displays a success snackbar
-  */
+  /** when the "Save" button is selected, saves client data, resets the page to its original state,
+   * and displays a success snackbar */
   onSubmit(): void {
     this.clientSvc.addClient(this.clientForm.value);
     this.openSnackbar();
     this.resetPage();
   }
 
-  /*
-  displays a success snackbar when the data is saved
-  */
+  /** displays a success snackbar when the data is saved */
   private openSnackbar() { // TODO: consider adding this to the client service
     this.snackBar.open(this.SNACKBAR_SUCCESS_MESSAGE, this.SNACKBAR_DISMISS_MESSAGE, {
       duration: this.SNACKBAR_DURATION,
     });
   }
 
-  /*
-  * resets all form fields and removes any Friend fields added by the user
-  */
+  /** resets all form fields and removes any Friend fields added by the user */
   resetPage(): void {
     this.clientForm.reset();
     this.removeAllButFirstFriend();
   }
 
-  /*
-  removes all Friend fields except the one initialized on page load.
-  used when the page is reset
- */
+  /** removes all Friend fields except the one initialized on page load.
+   * used when the page is reset */
   private removeAllButFirstFriend(): void {
     for (let i = this.friendArray.length - 1; i >= 1; i--) {
       this.friendArray.removeAt(i);
     }
   }
 
-  /*
-  adds a Friend form to the friendArray when the "Add friend" button is selected
-   */
+  /** adds a Friend form to the friendArray when the "Add friend" button is selected */
   addFriend(): void {
     this.friendArray.push(this.createItem());
   }
 
-  /*
-  removes the last-added Friend field
-  */
+  /** removes the last-added Friend field */
   removeLastFriend(): void {
     this.friendArray.removeAt(this.friendControls.length - 1); // TODO: what happens if we remove too many (there are not any left)?
   }
