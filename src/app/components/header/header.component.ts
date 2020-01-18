@@ -17,4 +17,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/analytics']);
   }
 
+  navigateToHome(): void {
+    this.router.navigate(['/']);
+  }
 }
