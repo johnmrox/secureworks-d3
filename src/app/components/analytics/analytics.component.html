@@ -1,1 +1,13 @@
-<p>analytics works!</p>
+<div>
+  <ng-container *ngIf="data.length; else noClientTemplate">
+    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.AGE)">Age</button>
+    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.WEIGHT)">Weight</button>
+    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.FRIENDS)">Number of Friends</button>
+    <app-bar-chart [data]="data"></app-bar-chart>
+    <h3>{{selectedMode | titlecase}}</h3>
+  </ng-container>
+
+  <ng-template #noClientTemplate>
+    <h3>Please enter client information.</h3>
+  </ng-template>
+</div>

@@ -100,6 +100,11 @@ export class ClientComponent implements OnInit {
 
   /** removes the last-added Friend field */
   removeLastFriendField(): void {
-    this.friendArray.removeAt(this.friendControls.length - 1);
+    this.friendArray.removeAt(this.friendArray.length - 1);
+  }
+
+  /** returns whether any friend fields have been added by the user */
+  hasFriends(): boolean {
+    return this.friendArray.length > 0;
   }
 }
