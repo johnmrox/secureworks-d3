@@ -1,4 +1,7 @@
-<mat-toolbar>
-  <button mat-button type="button" (click)="navigateToClients()">Clients</button>
-  <button mat-button type="button" (click)="navigateToAnalytics()">Analytics</button>
+<mat-toolbar color="primary" class="flex-container">
+  <div class="logo" (click)="navigateToClients()">Client App</div>
+  <nav>
+    <button mat-button type="button" (click)="navigateToClients()">Clients</button>
+    <button mat-button type="button" (click)="navigateToAnalytics()">Analytics</button>
+  </nav>
 </mat-toolbar>
