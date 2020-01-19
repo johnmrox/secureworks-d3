@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Client Information</mat-card-title>
-      <mat-card-subtitle>Enter all details</mat-card-subtitle>
+      <mat-card-subtitle>Enter details</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form class="input-form" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
@@ -12,6 +12,7 @@
             placeholder="Name"
             formControlName="name"
             type="text">
+          <mat-error *ngIf="name.invalid">Name is required</mat-error>
         </mat-form-field>
 
         <mat-form-field floatLabel="never" hideRequiredMarker>
@@ -20,6 +21,7 @@
             placeholder="Age"
             formControlName="age"
             type="number">
+          <mat-error *ngIf="age.invalid">Age is required</mat-error>
         </mat-form-field>
 
         <mat-form-field floatLabel="never" hideRequiredMarker>
@@ -28,6 +30,7 @@
             placeholder="Weight"
             formControlName="weight"
             type="number">
+          <mat-error *ngIf="weight.invalid">Weight is required</mat-error>
         </mat-form-field>
 
         <ng-container formArrayName="friends" *ngFor="let friendCtrl of friendControls; index as i">
@@ -46,8 +49,8 @@
         <mat-card-actions>
           <button mat-button type="submit">Save</button>
           <button mat-button type="button" (click)="resetPage()">Reset</button>
-          <button mat-button type="button" (click)="addFriend()">Add friend</button>
-          <button mat-button type="button" (click)="removeLastFriend()">Remove last friend</button>
+          <button mat-button type="button" (click)="addFriendField()">Add friend</button>
+          <button mat-button type="button" (click)="removeLastFriendField()">Remove last friend</button>
         </mat-card-actions>
       </form>
     </mat-card-content>
