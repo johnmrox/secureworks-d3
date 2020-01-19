@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -13,6 +12,13 @@ export class ClientComponent implements OnInit {
   // TODO: arrange these properly
   clientForm: FormGroup;
   friendArray: FormArray; // TODO: maybe change name
+  name: AbstractControl;
+  age: AbstractControl;
+  weight: AbstractControl;
+  friends: AbstractControl;
+
+  @ViewChild(FormGroupDirective, {static: false}) formRef: FormGroupDirective;
+
   private readonly SNACKBAR_DURATION = 5000;
   private readonly SNACKBAR_SUCCESS_MESSAGE = 'Client saved!';
   private readonly SNACKBAR_DISMISS_MESSAGE = 'Dismiss';
@@ -20,7 +26,6 @@ export class ClientComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private clientSvc: ClientService,
-    private router: Router,
     private snackBar: MatSnackBar) {
   }
 
@@ -31,26 +36,30 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeForms();
+    this.initializeFormsAndControls();
   }
 
   /** initializes the clientForm and any needed controls */
-  private initializeForms(): void {
+  private initializeFormsAndControls(): void {
     this.clientForm = this.fb.group({
-      name: [null],
-      age: [null],
-      weight: [null],
-      friends: this.fb.array([this.createItem()])
+      name: [null, Validators.required],
+      age: [null, Validators.required],
+      weight: [null, Validators.required],
+      friends: this.fb.array([])
     });
 
     this.friendArray = this.clientForm.get('friends') as FormArray;
+    this.name = this.clientForm.get('name');
+    this.age = this.clientForm.get('age');
+    this.weight = this.clientForm.get('weight');
+    this.friends = this.clientForm.get('friends');
   }
 
   /** creates a form group for the friends form array on page load and when the
    * "Add friend" button is selected */
   private createItem(): FormGroup {
     return this.fb.group({
-      friend: [null]
+      friend: [null, Validators.required]
     });
   }
 
@@ -71,25 +80,26 @@ export class ClientComponent implements OnInit {
 
   /** resets all form fields and removes any Friend fields added by the user */
   resetPage(): void {
+    this.formRef.resetForm();
     this.clientForm.reset();
-    this.removeAllButFirstFriend();
+    this.removeAllFriendFields();
   }
 
-  /** removes all Friend fields except the one initialized on page load.
+  /** removes all Friend fields added by the user.
    * used when the page is reset */
-  private removeAllButFirstFriend(): void {
-    for (let i = this.friendArray.length - 1; i >= 1; i--) {
-      this.friendArray.removeAt(i);
+  private removeAllFriendFields(): void {
+    while (this.friendArray.length) {
+      this.friendArray.removeAt(0);
     }
   }
 
   /** adds a Friend form to the friendArray when the "Add friend" button is selected */
-  addFriend(): void {
+  addFriendField(): void {
     this.friendArray.push(this.createItem());
   }
 
   /** removes the last-added Friend field */
-  removeLastFriend(): void {
-    this.friendArray.removeAt(this.friendControls.length - 1); // TODO: what happens if we remove too many (there are not any left)?
+  removeLastFriendField(): void {
+    this.friendArray.removeAt(this.friendControls.length - 1);
   }
 }

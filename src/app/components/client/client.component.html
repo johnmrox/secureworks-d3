@@ -43,6 +43,7 @@
               placeholder="Friend name"
               formControlName="friend"
               type="text">
+            <mat-error *ngIf="friends.invalid">Friend name is required</mat-error>
           </mat-form-field>
         </ng-container>
 
