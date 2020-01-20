@@ -3,10 +3,8 @@ mat-card {
 }
 
 .input-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.input-form > * {
-  width: 100%;
+  align-items: center;
+  & > * {
+    width: 100%;
+  }
 }

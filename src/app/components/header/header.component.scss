@@ -1,14 +1,10 @@
-.flex-container {
-  display: flex;
-}
-
 .logo {
   font-size: 22px;
   cursor: pointer;
-  padding-left: 16px;
+  padding: 0 16px;
 }
 
-nav {
+.nav-items {
   text-align: right;
   flex-grow: 1;
 }

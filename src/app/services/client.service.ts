@@ -5,20 +5,19 @@ import {Observable, of} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-/** this service provides methods to update the client data */
+/** this service provides methods to update and retrieve the client data */
 export class ClientService {
   private clients: Client[] = [];
 
   constructor() { }
 
-  /** TODO: add documentation */
-  addClient(client: Client) {
+  /** add client data to the list of clients */
+  addClient(client: Client): void {
     this.clients.push(client);
-    console.log('clients after add:', this.clients);
   }
 
-  /** TODO: add documentation */
-  getClients(): Observable<Client[]> {
+  /** returns the list of clients as an observable */
+  getClients$(): Observable<Client[]> {
     return of(this.clients);
   }
 }

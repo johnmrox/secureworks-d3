@@ -1,13 +1,14 @@
-<div>
-  <ng-container *ngIf="data.length; else noClientTemplate">
+<!-- TODO: should i try this with hidden instead of ngIf? -->
+<div class="container">
+  <ng-container *ngIf="areClientsPopulated(); else noClientTemplate">
     <button mat-raised-button type="button" (click)="handleModeSelected(Mode.AGE)">Age</button>
     <button mat-raised-button type="button" (click)="handleModeSelected(Mode.WEIGHT)">Weight</button>
     <button mat-raised-button type="button" (click)="handleModeSelected(Mode.FRIENDS)">Number of Friends</button>
-    <app-bar-chart [data]="data"></app-bar-chart>
+    <app-bar-graph [data]="chartData"></app-bar-graph>
     <h3>{{selectedMode | titlecase}}</h3>
   </ng-container>
 
   <ng-template #noClientTemplate>
-    <h3>Please enter client information.</h3>
+    <h3>Please enter client information</h3>
   </ng-template>
 </div>

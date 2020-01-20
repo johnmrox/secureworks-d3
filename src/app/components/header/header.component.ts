@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   /** navigate to the Analytics component */
@@ -20,6 +20,11 @@ export class HeaderComponent implements OnInit {
 
   /** navigate to the Client component */
   navigateToClients(): void {
+    this.router.navigate(['/clients']);
+  }
+
+  /** navigate to the home component */
+  navigateHome(): void {
     this.router.navigate(['/']);
   }
 }

@@ -9,7 +9,6 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule,
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
@@ -17,13 +16,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ClientComponent } from './components/client/client.component';
+import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnalyticsComponent,
     HeaderComponent,
-    ClientComponent
+    ClientComponent,
+    BarGraphComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,6 @@ import { ClientComponent } from './components/client/client.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

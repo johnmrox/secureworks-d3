@@ -1,38 +1,44 @@
 <div class="container">
   <mat-card>
+    <!-- Header -->
     <mat-card-header>
       <mat-card-title>Client Information</mat-card-title>
       <mat-card-subtitle>Enter details</mat-card-subtitle>
     </mat-card-header>
+
     <mat-card-content>
-      <form class="input-form" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <form class="flex-container input-form" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <!-- Name Form -->
         <mat-form-field floatLabel="never" hideRequiredMarker>
           <input
             matInput
             placeholder="Name"
             formControlName="name"
             type="text">
-          <mat-error *ngIf="name.invalid">Name is required</mat-error>
+          <mat-error *ngIf="nameCtrl.invalid">Name is required</mat-error>
         </mat-form-field>
 
+        <!-- Age Form -->
         <mat-form-field floatLabel="never" hideRequiredMarker>
           <input
             matInput
             placeholder="Age"
             formControlName="age"
             type="number">
-          <mat-error *ngIf="age.invalid">Age is required</mat-error>
+          <mat-error *ngIf="ageCtrl.invalid">Age is required</mat-error>
         </mat-form-field>
 
+        <!-- Weight Form -->
         <mat-form-field floatLabel="never" hideRequiredMarker>
           <input
             matInput
             placeholder="Weight"
             formControlName="weight"
             type="number">
-          <mat-error *ngIf="weight.invalid">Weight is required</mat-error>
+          <mat-error *ngIf="weightCtrl.invalid">Weight is required</mat-error>
         </mat-form-field>
 
+        <!-- Friends Form -->
         <ng-container formArrayName="friends" *ngFor="let friendCtrl of friendControls; index as i">
           <mat-form-field
             [formGroupName]="i.toString()"
@@ -43,10 +49,11 @@
               placeholder="Friend name"
               formControlName="friend"
               type="text">
-            <mat-error *ngIf="friends.invalid">Friend name is required</mat-error>
+            <mat-error *ngIf="friendCtrls.invalid">Friend name is required</mat-error>
           </mat-form-field>
         </ng-container>
 
+        <!-- Buttons -->
         <mat-card-actions>
           <button color="primary" mat-raised-button type="submit" [disabled]="clientForm.invalid">Save</button>
           <button color="warn" mat-raised-button type="button" (click)="resetPage()">Reset</button>

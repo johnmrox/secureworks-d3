@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-client',
@@ -9,16 +10,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  // TODO: arrange these properly
+  // forms
   clientForm: FormGroup;
-  friendArray: FormArray; // TODO: maybe change name
-  name: AbstractControl;
-  age: AbstractControl;
-  weight: AbstractControl;
-  friends: AbstractControl;
-
   @ViewChild(FormGroupDirective, {static: false}) formRef: FormGroupDirective;
 
+  // form controls
+  nameCtrl: AbstractControl;
+  ageCtrl: AbstractControl;
+  weightCtrl: AbstractControl;
+  friendCtrls: FormArray;
+
+  // constants
   private readonly SNACKBAR_DURATION = 5000;
   private readonly SNACKBAR_SUCCESS_MESSAGE = 'Client saved!';
   private readonly SNACKBAR_DISMISS_MESSAGE = 'Dismiss';
@@ -29,30 +31,36 @@ export class ClientComponent implements OnInit {
     private snackBar: MatSnackBar) {
   }
 
-  /** returns an array of the friend controls. there is one initially on the page
-   * but these can be added and removed by the "Add friend" button */
+  /** returns an array of friend controls.
+   * these can be added and removed by the "Add friend" button */
   get friendControls(): AbstractControl[] {
-    return this.friendArray.controls;
+    return this.friendCtrls.controls;
   }
 
   ngOnInit(): void {
     this.initializeFormsAndControls();
   }
 
-  /** initializes the clientForm and any needed controls */
+  /** initializes the clientForm and any necessary controls */
   private initializeFormsAndControls(): void {
+    this.initClientForm();
+    this.initClientControls();
+  }
+
+  private initClientForm(): void {
     this.clientForm = this.fb.group({
       name: [null, Validators.required],
       age: [null, Validators.required],
       weight: [null, Validators.required],
       friends: this.fb.array([])
     });
+  }
 
-    this.friendArray = this.clientForm.get('friends') as FormArray;
-    this.name = this.clientForm.get('name');
-    this.age = this.clientForm.get('age');
-    this.weight = this.clientForm.get('weight');
-    this.friends = this.clientForm.get('friends');
+  private initClientControls(): void {
+    this.nameCtrl = this.clientForm.get('name');
+    this.ageCtrl = this.clientForm.get('age');
+    this.weightCtrl = this.clientForm.get('weight');
+    this.friendCtrls = this.clientForm.get('friends') as FormArray;
   }
 
   /** creates a form group for the friends form array on page load and when the
@@ -72,13 +80,13 @@ export class ClientComponent implements OnInit {
   }
 
   /** displays a success snackbar when the data is saved */
-  private openSnackbar() { // TODO: consider adding this to the client service
+  private openSnackbar(): void { // TODO: consider adding this to the client service
     this.snackBar.open(this.SNACKBAR_SUCCESS_MESSAGE, this.SNACKBAR_DISMISS_MESSAGE, {
       duration: this.SNACKBAR_DURATION,
     });
   }
 
-  /** resets all form fields and removes any Friend fields added by the user */
+  /** resets all form fields to pre-submit states and removes any friend fields added by the user */
   resetPage(): void {
     this.formRef.resetForm();
     this.clientForm.reset();
@@ -88,23 +96,23 @@ export class ClientComponent implements OnInit {
   /** removes all Friend fields added by the user.
    * used when the page is reset */
   private removeAllFriendFields(): void {
-    while (this.friendArray.length) {
-      this.friendArray.removeAt(0);
+    while (this.hasFriends()) {
+      this.friendCtrls.removeAt(0);
     }
-  }
-
-  /** adds a Friend form to the friendArray when the "Add friend" button is selected */
-  addFriendField(): void {
-    this.friendArray.push(this.createItem());
-  }
-
-  /** removes the last-added Friend field */
-  removeLastFriendField(): void {
-    this.friendArray.removeAt(this.friendArray.length - 1);
   }
 
   /** returns whether any friend fields have been added by the user */
   hasFriends(): boolean {
-    return this.friendArray.length > 0;
+    return this.friendCtrls.length > 0;
+  }
+
+  /** adds a Friend form to the friendArray when the "Add friend" button is selected */
+  addFriendField(): void {
+    this.friendCtrls.push(this.createItem());
+  }
+
+  /** removes the last-added Friend field */
+  removeLastFriendField(): void {
+    this.friendCtrls.removeAt(this.friendCtrls.length - 1);
   }
 }
