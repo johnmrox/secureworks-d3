@@ -1,24 +1,39 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ClientComponent } from './client.component';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule} from '@angular/material';
 import {AbstractControl, FormArray, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ClientService} from '../../services/client.service';
 
 describe('ClientComponent', () => {
   let component: ClientComponent;
   let fixture: ComponentFixture<ClientComponent>;
+  let form: HTMLElement;
+  let matCardContent: HTMLElement;
+  let matCardTitle: HTMLElement;
+  let matCardSubtitle: HTMLElement;
+  let matCardHeader: HTMLElement;
+  let buttons: HTMLElement[];
+  let matFormFields: HTMLElement[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ClientComponent ],
-      imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatButtonModule, BrowserAnimationsModule]
+      imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatButtonModule, BrowserAnimationsModule],
+      // providers: [ClientService] // TODO DO NOT DO THIS
     });
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ClientComponent);
     component = fixture.componentInstance;
+    form = fixture.nativeElement.querySelector('form');
+    matCardContent = fixture.nativeElement.querySelector('mat-card-content');
+    matCardTitle = fixture.nativeElement.querySelector('mat-card-title');
+    matCardSubtitle = fixture.nativeElement.querySelector('mat-card-subtitle');
+    matCardHeader = fixture.nativeElement.querySelector('mat-card-header');
+    buttons = fixture.nativeElement.querySelectorAll('button');
+    matFormFields = fixture.nativeElement.querySelectorAll('mat-form-field');
     fixture.detectChanges();
   });
 
@@ -52,67 +67,55 @@ describe('ClientComponent', () => {
   });
 
   it('should contain four buttons', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button').length).toBe(4);
+    expect(buttons.length).toBe(4);
   });
 
   it('should render the Add Client button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[0].textContent).toContain('Save');
+    expect(buttons[0].textContent).toContain('Save');
   });
 
   it('should render the Add Client button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[1].textContent).toContain('Reset');
+    expect(buttons[1].textContent).toContain('Reset');
   });
 
   it('should render the Add Client button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[2].textContent).toContain('Add friend');
+    expect(buttons[2].textContent).toContain('Add friend');
   });
 
   it('should render the Add Client button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[3].textContent).toContain('Remove last friend');
+    expect(buttons[3].textContent).toContain('Remove last friend');
   });
 
   it('should contain a Material Card Header element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card-header')).toBeDefined();
+    expect(matCardHeader).toBeDefined();
   });
 
   it('should contain a Material Card Title element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card-title')).toBeDefined();
-    expect(compiled.querySelector('mat-card-title').textContent).toContain('Client Information');
+    expect(matCardTitle).toBeDefined();
+    expect(matCardTitle.textContent).toContain('Client Information');
   });
 
   it('should contain a Material Card Subtitle element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card-subtitle')).toBeDefined();
-    expect(compiled.querySelector('mat-card-subtitle').textContent).toContain('Enter details');
+    expect(matCardSubtitle).toBeDefined();
+    expect(matCardSubtitle.textContent).toContain('Enter details');
   });
 
   it('should contain a Material Card Content element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card-content')).toBeDefined();
+    expect(matCardContent).toBeDefined();
   });
 
   it('should contain a form', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('form')).toBeDefined();
+    expect(form).toBeDefined();
   });
 
   it('should contain three Material Form Fields', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('mat-form-field').length).toBe(3);
+    expect(matFormFields.length).toBe(3);
   });
 
   // TODO: test the functionality of the "Add friend" button
   // it('should be able to add Material Form Fields', () => {
-  //   const compiled = fixture.debugElement.nativeElement;
   //   component.addFriendField();
-  //   expect(compiled.querySelectorAll('mat-form-field').length).toBe(4);
+  //   expect(matFormFields.length).toBe(4);
   // }); TODO: this is not working. maybe use tick and fakeAsync like here? https://stackoverflow.com/questions/39514679/test-an-async-pipetransform
 
   // TODO: test the functionality of the "Save" button
@@ -120,4 +123,6 @@ describe('ClientComponent', () => {
   // TODO: test the functionality of the "Reset" button
 
   // TODO: test the functionality of the "Remove last friend" button
+
+  // TODO: test the functionality of the client services's addClient method
 });
