@@ -22,17 +22,22 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnInit() {}
 
-  ngOnChanges(): void { // TODO: should i use something instead of ngOnChanges?
-    // TODO: something is very wrong here. i should not have to use !this.chartRef. figure out a way to ensure the component is loaded
-    if (!this.data || !this.chartRef) { return; }
+  ngOnChanges(): void {
+    if (!this.data || !this.chartRef) {
+      return;
+    }
     this.createChart();
   }
 
   ngAfterViewInit(): void {
-    if (!this.data || !this.chartRef) { return; } // TODO: this is new. hacky workaround
+    if (!this.data || !this.chartRef) {
+      return;
+    }
     this.createChart();
   }
 
+  /** create the bar chart and applies styling.
+   * the size is recalculated with every window resize event */
   private createChart(): void {
     this.removeSvg();
 
@@ -80,10 +85,12 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('height', d => height - y(d.yVal));
   }
 
+  /** removes any previous instances to ensure there are no duplicates */
   private removeSvg(): void {
     d3.select('svg').remove();
   }
 
+  /** re-creates chart when the screen size changes */
   handleResize(event: Event): void {
     this.createChart();
   }
