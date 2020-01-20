@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-client',
