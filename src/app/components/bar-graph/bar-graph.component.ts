@@ -12,6 +12,7 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('chart', {static: false}) chartRef: ElementRef;
   @Input() data: ChartData[];
 
+  // constants
   private readonly MARGIN_TOP = 20;
   private readonly MARGIN_RIGHT = 20;
   private readonly MARGIN_BOTTOM = 30;
