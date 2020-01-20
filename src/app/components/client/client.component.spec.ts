@@ -3,7 +3,6 @@ import { ClientComponent } from './client.component';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule} from '@angular/material';
 import {AbstractControl, FormArray, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ClientService} from '../../services/client.service';
 
 describe('ClientComponent', () => {
   let component: ClientComponent;
@@ -16,11 +15,11 @@ describe('ClientComponent', () => {
   let buttons: HTMLElement[];
   let matFormFields: HTMLElement[];
 
+  // TODO: provide clientService stub
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ClientComponent ],
-      imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatButtonModule, BrowserAnimationsModule],
-      // providers: [ClientService] // TODO DO NOT DO THIS
+      imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatButtonModule, BrowserAnimationsModule]
     });
   }));
 
@@ -70,19 +69,19 @@ describe('ClientComponent', () => {
     expect(buttons.length).toBe(4);
   });
 
-  it('should render the Add Client button', () => {
+  it('should render the Add client button', () => {
     expect(buttons[0].textContent).toContain('Save');
   });
 
-  it('should render the Add Client button', () => {
+  it('should render the Reset button', () => {
     expect(buttons[1].textContent).toContain('Reset');
   });
 
-  it('should render the Add Client button', () => {
+  it('should render the Add friend button', () => {
     expect(buttons[2].textContent).toContain('Add friend');
   });
 
-  it('should render the Add Client button', () => {
+  it('should render the Remove last friend button', () => {
     expect(buttons[3].textContent).toContain('Remove last friend');
   });
 
@@ -113,10 +112,6 @@ describe('ClientComponent', () => {
   });
 
   // TODO: test the functionality of the "Add friend" button
-  // it('should be able to add Material Form Fields', () => {
-  //   component.addFriendField();
-  //   expect(matFormFields.length).toBe(4);
-  // }); TODO: this is not working. maybe use tick and fakeAsync like here? https://stackoverflow.com/questions/39514679/test-an-async-pipetransform
 
   // TODO: test the functionality of the "Save" button
 

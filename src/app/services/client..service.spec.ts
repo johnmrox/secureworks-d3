@@ -9,4 +9,11 @@ describe('ClientInfoService', () => {
     const service: ClientService = TestBed.get(ClientService);
     expect(service).toBeTruthy();
   });
+
+  // TODO: ensure getClients$ method exists
+  // TODO: ensure getClients$ method returns an observable
+  // TODO: ensure getClients$ method is callable
+
+  // TODO: ensure addClient method exists
+  // TODO: ensure addClient method is callable
 });

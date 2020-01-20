@@ -1,7 +1,6 @@
-<!-- TODO: should i try this with hidden instead of ngIf? -->
 <div class="container">
   <ng-container *ngIf="areClientsPopulated(); else noClientTemplate">
-    <div>
+    <div class="button-container">
       <button mat-raised-button type="button" (click)="handleModeSelected(Mode.AGE)">Age</button>
       <button mat-raised-button type="button" (click)="handleModeSelected(Mode.WEIGHT)">Weight</button>
       <button mat-raised-button type="button" (click)="handleModeSelected(Mode.FRIENDS)">Number of Friends</button>
@@ -11,6 +10,6 @@
   </ng-container>
 
   <ng-template #noClientTemplate>
-    <h3>Please enter client information</h3>
+    <h3 class="info-missing">Please enter client information</h3>
   </ng-template>
 </div>

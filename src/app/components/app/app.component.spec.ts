@@ -15,7 +15,7 @@ describe('AppComponent', () => {
         AppComponent,
         HeaderComponent
       ],
-    }).compileComponents();
+    });
   }));
 
   it('should create the app', () => {
@@ -44,17 +44,4 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('main').textContent).toBeDefined();
   });
-
-  // it(`should have as title 'secureworks-input'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('secureworks-input');
-  // });
-
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('.content span').textContent).toContain('secureworks-input app is running!');
-  // });
 });

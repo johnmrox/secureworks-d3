@@ -24,7 +24,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     this.updateChartData();
   }
 
-  /** when the page is initialized, updates the chart data and normalizes it to the type the bar chart expects */
+  /** when the page is initialized, updates the chart data and transforms it to the type the bar chart expects */
   private updateChartData(): void {
     this.getClientSubscription = this.clientSvc.getClients$()
       .pipe(map((clients: Client[]) => clients.map(
@@ -33,8 +33,8 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   }
 
   /** accepts client data and transforms it to the type required by the bar chart component (i.e., xVal and yVal).
-   * also, if the user selects the mode age or weight, those numerical values are passed on.
-   * however, if the user selects friends mode, the number of friends is passed on instead of the names
+   * also, if the user selects the age or weight mode, those numerical values are maintained.
+   * however, if the user selects friends mode, the number of friends is returned instead of the names
    * of the friends themselves */
   private normalizeBarChartData(clientData: Client): ChartData {
     if (this.selectedMode === ChartMode.FRIENDS) {
@@ -44,7 +44,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   }
 
   /** updates the data to match the mode the user selects.
-   * triggered when the user selects the chart mode  */
+   * triggered when the user selects the chart mode */
   handleModeSelected(mode: ChartMode): void {
     this.selectedMode = mode;
     this.updateChartData();

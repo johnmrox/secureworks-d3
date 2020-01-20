@@ -74,7 +74,7 @@ describe('HeaderComponent', () => {
     expect(buttons[1].textContent).toContain('Analytics');
   });
 
-  it('should render the logo div', () => {
+  it('should render the logo', () => {
     expect(logo).toBeDefined();
     expect(logo.textContent).toContain('Client App');
   });

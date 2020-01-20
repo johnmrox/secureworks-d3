@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BarGraphComponent } from './bar-graph.component';
 
 describe('BarChartComponent', () => {
@@ -9,8 +8,7 @@ describe('BarChartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BarGraphComponent ]
-    })
-    .compileComponents();
+    });
   }));
 
   beforeEach(() => {
@@ -19,7 +17,7 @@ describe('BarChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the BarGraphComponent', () => {
     expect(component).toBeTruthy();
   });
 });

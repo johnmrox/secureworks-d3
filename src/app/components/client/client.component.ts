@@ -19,7 +19,7 @@ export class ClientComponent implements OnInit {
   weightCtrl: AbstractControl;
   friendCtrls: FormArray;
 
-  // constants
+  // snackbar constants
   private readonly SNACKBAR_DURATION = 5000;
   private readonly SNACKBAR_SUCCESS_MESSAGE = 'Client saved!';
   private readonly SNACKBAR_DISMISS_MESSAGE = 'Dismiss';
@@ -79,7 +79,7 @@ export class ClientComponent implements OnInit {
   }
 
   /** displays a success snackbar when the data is saved */
-  private openSnackbar(): void { // TODO: consider adding this to the client service
+  private openSnackbar(): void {
     this.snackBar.open(this.SNACKBAR_SUCCESS_MESSAGE, this.SNACKBAR_DISMISS_MESSAGE, {
       duration: this.SNACKBAR_DURATION,
     });
@@ -92,7 +92,7 @@ export class ClientComponent implements OnInit {
     this.removeAllFriendFields();
   }
 
-  /** removes all Friend fields added by the user.
+  /** removes all friend fields added by the user.
    * used when the page is reset */
   private removeAllFriendFields(): void {
     while (this.hasFriends()) {
@@ -110,7 +110,7 @@ export class ClientComponent implements OnInit {
     this.friendCtrls.push(this.createItem());
   }
 
-  /** removes the last-added Friend field */
+  /** removes the last-added friend field */
   removeLastFriendField(): void {
     this.friendCtrls.removeAt(this.friendCtrls.length - 1);
   }
