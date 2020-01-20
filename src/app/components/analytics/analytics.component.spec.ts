@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AnalyticsComponent } from './analytics.component';
-import {BarGraphComponent} from '../bar-graph/bar-graph.component';
-import {By} from '@angular/platform-browser';
+import { BarGraphComponent } from '../bar-graph/bar-graph.component';
+import { By } from '@angular/platform-browser';
 
 describe('AnalyticsComponent', () => {
   let component: AnalyticsComponent;
@@ -10,7 +10,7 @@ describe('AnalyticsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnalyticsComponent, BarGraphComponent ]
+      declarations: [AnalyticsComponent, BarGraphComponent]
     });
   }));
 

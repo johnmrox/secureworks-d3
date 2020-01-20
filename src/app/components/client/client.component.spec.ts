@@ -1,8 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClientComponent } from './client.component';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule} from '@angular/material';
-import {AbstractControl, FormArray, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSnackBarModule
+} from '@angular/material';
+import {
+  AbstractControl,
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ClientComponent', () => {
   let component: ClientComponent;
@@ -18,8 +29,16 @@ describe('ClientComponent', () => {
   // TODO: provide clientService stub
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientComponent ],
-      imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatButtonModule, BrowserAnimationsModule]
+      declarations: [ClientComponent],
+      imports: [
+        MatCardModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSnackBarModule,
+        MatInputModule,
+        MatButtonModule,
+        BrowserAnimationsModule
+      ]
     });
   }));
 

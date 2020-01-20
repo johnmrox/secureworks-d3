@@ -11,12 +11,12 @@ import {
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ClientComponent } from './components/client/client.component';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
-import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -43,4 +43,4 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

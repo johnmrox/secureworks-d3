@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import {MatToolbarModule} from '@angular/material';
-import {RouterTestingModule} from '@angular/router/testing';
-import {Router} from '@angular/router';
+import { MatToolbarModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,11 +17,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ],
-      imports: [ MatToolbarModule, RouterTestingModule ],
-      providers: [
-        { provide: Router, useValue: router}
-      ]
+      declarations: [HeaderComponent],
+      imports: [MatToolbarModule, RouterTestingModule],
+      providers: [{ provide: Router, useValue: router }]
     });
   }));
 
@@ -39,17 +37,17 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it ('should navigate to the home component', () => {
+  it('should navigate to the home component', () => {
     component.navigateHome();
     expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
-  it ('should navigate to the clients component', () => {
+  it('should navigate to the clients component', () => {
     component.navigateToClients();
     expect(router.navigate).toHaveBeenCalledWith(['/clients']);
   });
 
-  it ('should navigate to the analytics component', () => {
+  it('should navigate to the analytics component', () => {
     component.navigateToAnalytics();
     expect(router.navigate).toHaveBeenCalledWith(['/analytics']);
   });

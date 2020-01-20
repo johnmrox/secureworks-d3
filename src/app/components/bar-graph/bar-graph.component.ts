@@ -1,6 +1,15 @@
-import {Component, OnInit, Input, ViewChild, ElementRef, OnChanges, AfterViewInit, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  AfterViewInit,
+  ViewEncapsulation
+} from '@angular/core';
 import * as d3 from 'd3';
-import {ChartData} from '../../models/chart-data.model';
+import { ChartData } from '../../models/chart-data.model';
 
 @Component({
   selector: 'app-bar-graph',
@@ -9,7 +18,7 @@ import {ChartData} from '../../models/chart-data.model';
   encapsulation: ViewEncapsulation.None
 })
 export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
-  @ViewChild('chart', {static: false}) chartRef: ElementRef;
+  @ViewChild('chart', { static: false }) chartRef: ElementRef;
   @Input() data: ChartData[];
 
   // constants
@@ -36,19 +45,25 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
     this.createChart();
   }
 
-  /** create the bar chart and applies styling.
-   * the size is recalculated with every window resize event */
+  /**
+   * creates the bar chart and applies styling.
+   * the size is recalculated with every window resize event
+   */
   private createChart(): void {
     this.removeSvg();
 
     const chartElement = this.chartRef.nativeElement;
 
-    const svg = d3.select(chartElement).append('svg')
+    const svg = d3
+      .select(chartElement)
+      .append('svg')
       .attr('width', chartElement.offsetWidth)
       .attr('height', chartElement.offsetHeight);
 
-    const width = chartElement.offsetWidth - this.MARGIN_LEFT - this.MARGIN_RIGHT;
-    const height = chartElement.offsetHeight - this.MARGIN_TOP - this.MARGIN_BOTTOM;
+    const width =
+      chartElement.offsetWidth - this.MARGIN_LEFT - this.MARGIN_RIGHT;
+    const height =
+      chartElement.offsetHeight - this.MARGIN_TOP - this.MARGIN_BOTTOM;
 
     const x = d3
       .scaleBand()
@@ -61,7 +76,8 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
       .rangeRound([height, 0])
       .domain([0, d3.max(this.data, d => d.yVal)]);
 
-    const g = svg.append('g')
+    const g = svg
+      .append('g')
       .attr('transform', `translate(${this.MARGIN_LEFT}, ${this.MARGIN_TOP})`);
 
     g.append('g')
@@ -71,13 +87,17 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
 
     g.append('g')
       .attr('class', 'axis axis--y')
-      .call(d3.axisLeft(y)
-        .ticks(5)
-        .tickFormat(d3.format('d')));
+      .call(
+        d3
+          .axisLeft(y)
+          .ticks(5)
+          .tickFormat(d3.format('d'))
+      );
 
     g.selectAll('.bar')
       .data(this.data)
-      .enter().append('rect')
+      .enter()
+      .append('rect')
       .attr('class', 'bar')
       .attr('x', d => x(d.xVal))
       .attr('y', d => y(d.yVal))
@@ -85,12 +105,16 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('height', d => height - y(d.yVal));
   }
 
-  /** removes any previous instances to ensure there are no duplicates */
+  /**
+   * removes any previous instances to ensure there are no duplicates
+   */
   private removeSvg(): void {
     d3.select('svg').remove();
   }
 
-  /** re-creates chart when the screen size changes */
+  /**
+   * re-creates chart when the screen size changes
+   */
   handleResize(event: Event): void {
     this.createChart();
   }
