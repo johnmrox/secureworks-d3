@@ -7,6 +7,10 @@ import {Router} from '@angular/router';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let nav: HTMLElement;
+  let logo: HTMLElement;
+  let matToolbar: HTMLElement;
+  let buttons: HTMLElement[];
   const router = {
     navigate: jasmine.createSpy('navigate')
   };
@@ -18,13 +22,16 @@ describe('HeaderComponent', () => {
       providers: [
         { provide: Router, useValue: router}
       ]
-    })
-    .compileComponents();
+    });
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    nav = fixture.nativeElement.querySelector('nav');
+    logo = fixture.nativeElement.querySelector('.logo');
+    buttons = fixture.nativeElement.querySelectorAll('button');
+    matToolbar = fixture.nativeElement.querySelectorAll('mat-toolbar');
     fixture.detectChanges();
   });
 
@@ -48,33 +55,27 @@ describe('HeaderComponent', () => {
   });
 
   it('should contain the toolbar element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-toolbar')).toBeDefined();
+    expect(matToolbar).toBeDefined();
   });
 
   it('should contain a nav element', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('nav')).toBeDefined();
+    expect(nav).toBeDefined();
   });
 
   it('should contain two buttons', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button').length).toBe(2);
+    expect(buttons.length).toBe(2);
   });
 
   it('should render the Add Client button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[0].textContent).toContain('Add Client');
+    expect(buttons[0].textContent).toContain('Add Client');
   });
 
   it('should render the Analytics button', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('button')[1].textContent).toContain('Analytics');
+    expect(buttons[1].textContent).toContain('Analytics');
   });
 
   it('should render the logo div', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.logo')).toBeDefined();
-    expect(compiled.querySelector('.logo').textContent).toContain('Client App');
+    expect(logo).toBeDefined();
+    expect(logo.textContent).toContain('Client App');
   });
 });
