@@ -1,9 +1,11 @@
 <!-- TODO: should i try this with hidden instead of ngIf? -->
 <div class="container">
   <ng-container *ngIf="areClientsPopulated(); else noClientTemplate">
-    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.AGE)">Age</button>
-    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.WEIGHT)">Weight</button>
-    <button mat-raised-button type="button" (click)="handleModeSelected(Mode.FRIENDS)">Number of Friends</button>
+    <div>
+      <button mat-raised-button type="button" (click)="handleModeSelected(Mode.AGE)">Age</button>
+      <button mat-raised-button type="button" (click)="handleModeSelected(Mode.WEIGHT)">Weight</button>
+      <button mat-raised-button type="button" (click)="handleModeSelected(Mode.FRIENDS)">Number of Friends</button>
+    </div>
     <app-bar-graph [data]="chartData"></app-bar-graph>
     <h3>{{selectedMode | titlecase}}</h3>
   </ng-container>
