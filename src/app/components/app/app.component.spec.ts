@@ -24,6 +24,27 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('should contain the header', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-header').textContent).toBeDefined();
+  });
+
+  it('should contain a router outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('router-outlet').textContent).toBeDefined();
+  });
+
+  it('should contain the main content', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('main').textContent).toBeDefined();
+  });
+
   // it(`should have as title 'secureworks-input'`, () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   const app = fixture.debugElement.componentInstance;
